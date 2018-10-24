@@ -8,6 +8,12 @@
 
 require 'faker'
 
-100.times do
-  user = User.create!(username: Faker::Company.name, email: Faker::Internet.email)
+100.times do |index|
+  user = User.create!(first_name: Faker::Company.name, last_name: Faker::Company.name, email: Faker::Internet.email)
+  category = Category.create!(title: Faker::Company.name)
+  articles = Article.create(category_id: index + 1, title: Faker::FunnyName.name, content: Faker::FunnyName.name, user_id: index + 1)
+  comments = Comment.create(article_id: index + 1, content: Faker::FunnyName.name, user_id: index + 1)
+  likes = Like.create(user_id: index + 1, article_id: index + 1)
+  comments = Comment.create(comment_id: index + 1, content: Faker::FunnyName.name, user_id: index + 1)
+  likes = Like.create(user_id: index + 1, comment_id: index + 1)
 end
